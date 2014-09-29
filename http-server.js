@@ -34,16 +34,16 @@ function csvHandler(request, response){
       console.log('there was an error: ' + err);
     }
     else {
-      console.log(data.toString());
+      var csvString = data.toString();
+      response.writeHead(200, { 'Content-Type' : 'text/plain' });
+      json = JSON.stringify(csvString);
+      response.write(json);
+      response.end();
     }
   });
 
   
-  response.writeHead(200, { 'Content-Type' : 'text/plain' });
-
-  response.write('hello: ' + request.headers.host + '\n');
-  response.write('  --> you requested ' + request.url);
-  response.end();
+  
 }
 
 if (process.argv.length < 3) {
