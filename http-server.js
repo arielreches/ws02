@@ -28,7 +28,7 @@ function jsonHandler(request, response) {
 }
 
 function csvHandler(request, response){
- /* var file = 'users.csv';
+  var file = 'users.csv';
     fs.readFile(file, function (err, data) {
     if (err) {
       console.log('there was an error: ' + err);
@@ -37,7 +37,7 @@ function csvHandler(request, response){
       console.log(data.toString());
     }
   });
-*/
+
   
   response.writeHead(200, { 'Content-Type' : 'text/plain' });
 
