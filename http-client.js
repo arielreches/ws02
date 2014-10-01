@@ -12,7 +12,7 @@ var handlerType = process.argv[2];
 // The url to connect to:
 var urlStr = process.argv[3] || 'http://www-edlab.cs.umass.edu/cs326/schedule/';
 
-if (!(handlerType === 'h' || handlerType === 'rh' || handlerType === 'json')) {
+if (!(handlerType === 'h' || handlerType === 'rh' || handlerType === 'json' || handlerType === 'csvprint')) {
   console.log('usage: node http-client.js [h|rh|json] [url]');
   process.exit(1);  
 }
@@ -74,10 +74,27 @@ var re_handler = createResponseHandler(function (data) {
 
 // Even more interesting:
 var json_handler = createResponseHandler(function (data) {
- // var obj = JSON.parse(data);
- // console.log(obj);
- // console.log(typeof obj);
- console.log(data);
+  var obj = JSON.parse(data);
+ console.log(obj);
+
+
+ 
+});
+
+var csv_printer = createResponseHandler(function (data) {
+ 
+
+ var obj = JSON.parse(data);
+ for(var i in obj){
+  var user = obj[i]
+  console.log("\n");
+  for(var prop in user){
+    console.log(prop + ": " + user[prop]);
+    
+  }
+
+}
+ 
 });
 
 console.log(' --> connecting to ' + options.host + ' on port ' + options.port);
@@ -96,6 +113,12 @@ switch (handlerType) {
     var req = http.request(options, json_handler);
     req.end();
     break;  
+  case 'csvprint':
+    var req = http.request(options, csv_printer);
+    req.end();
+    break;
+
+
   default:
     console.log('unknown handler type');
 }
