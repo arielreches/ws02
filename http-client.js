@@ -74,8 +74,10 @@ var re_handler = createResponseHandler(function (data) {
 
 // Even more interesting:
 var json_handler = createResponseHandler(function (data) {
-  var obj = JSON.parse(data);
-  console.log(obj);
+ // var obj = JSON.parse(data);
+ // console.log(obj);
+ // console.log(typeof obj);
+ console.log(data);
 });
 
 console.log(' --> connecting to ' + options.host + ' on port ' + options.port);
@@ -89,7 +91,7 @@ switch (handlerType) {
   case 'rh':
     var req = http.request(options, re_handler);
     req.end();
-    break;
+    break; 
   case 'json':
     var req = http.request(options, json_handler);
     req.end();
