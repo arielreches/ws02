@@ -1,6 +1,8 @@
 var url = require('url');
 var http = require('http');
 
+console.log("test");
+
 if (process.argv.length < 3) {
   console.log('usage: node http-client.js [h|rh|json] [url]');
   process.exit(1);
